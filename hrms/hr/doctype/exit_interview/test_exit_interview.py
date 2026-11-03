@@ -9,7 +9,7 @@ from frappe.core.doctype.user_permission.test_user_permission import create_user
 from frappe.tests.test_webform import create_custom_doctype, create_webform
 from frappe.utils import getdate
 
-from erpnext.setup.doctype.employee.test_employee import make_employee
+from erp.setup.doctype.employee.test_employee import make_employee
 
 from hrms.hr.doctype.exit_interview.exit_interview import send_exit_questionnaire
 from hrms.tests.utils import HRMSTestSuite, make_user
@@ -132,7 +132,7 @@ def set_exit_questionnaire_settings():
 def create_notification_template():
 	template = frappe.db.exists("Email Template", _("Exit Questionnaire Notification"))
 	if not template:
-		base_path = frappe.get_app_path("erpnext", "hr", "doctype")
+		base_path = frappe.get_app_path("erp", "hr", "doctype")
 		response = frappe.read_file(
 			os.path.join(base_path, "exit_interview/exit_questionnaire_notification_template.html")
 		)

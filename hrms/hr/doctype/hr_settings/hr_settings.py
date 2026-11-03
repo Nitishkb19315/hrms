@@ -65,7 +65,7 @@ class HRSettings(Document):
 		PROCEED_WITH_FREQUENCY_CHANGE = False
 
 	def set_naming_series(self):
-		from erpnext.utilities.naming import set_by_naming_series
+		from erp.utilities.naming import set_by_naming_series
 
 		set_by_naming_series(
 			"Employee",

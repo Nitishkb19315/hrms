@@ -4,7 +4,7 @@
 import frappe
 from frappe.utils import add_days, flt, getdate, today
 
-from erpnext.setup.doctype.employee.test_employee import make_employee
+from erp.setup.doctype.employee.test_employee import make_employee
 
 from hrms.hr.doctype.employee_advance.test_employee_advance import make_employee_advance
 from hrms.hr.doctype.expense_claim.test_expense_claim import get_payable_account, make_expense_claim

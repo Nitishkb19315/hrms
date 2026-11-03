@@ -10,17 +10,17 @@ from frappe.model.workflow import get_workflow_name
 from frappe.query_builder.functions import Sum
 from frappe.utils import cstr, flt, get_link_to_form, today
 
-import erpnext
-from erpnext.accounts.doctype.repost_accounting_ledger.repost_accounting_ledger import (
+import erp
+from erp.accounts.doctype.repost_accounting_ledger.repost_accounting_ledger import (
 	validate_docs_for_voucher_types,
 )
-from erpnext.accounts.doctype.sales_invoice.sales_invoice import get_bank_cash_account
-from erpnext.accounts.general_ledger import make_gl_entries
-from erpnext.accounts.utils import (
+from erp.accounts.doctype.sales_invoice.sales_invoice import get_bank_cash_account
+from erp.accounts.general_ledger import make_gl_entries
+from erp.accounts.utils import (
 	create_gain_loss_journal,
 	unlink_ref_doc_from_payment_entries,
 )
-from erpnext.controllers.accounts_controller import AccountsController
+from erp.controllers.accounts_controller import AccountsController
 
 import hrms
 from hrms.hr.utils import set_employee_name, share_doc_with_approver, validate_active_employee
@@ -443,7 +443,7 @@ class ExpenseClaim(AccountsController, PWANotificationsMixin):
 			)
 
 	def set_default_accounting_dimension(self):
-		from erpnext.accounts.doctype.accounting_dimension.accounting_dimension import (
+		from erp.accounts.doctype.accounting_dimension.accounting_dimension import (
 			get_checks_for_pl_and_bs_accounts,
 		)
 
@@ -538,7 +538,7 @@ class ExpenseClaim(AccountsController, PWANotificationsMixin):
 		if frappe.db.get_single_value("HR Settings", "enable_multi_currency_expense_claim"):
 			return
 
-		self.currency = erpnext.get_company_currency(self.company)
+		self.currency = erp.get_company_currency(self.company)
 		self.exchange_rate = 1.0
 		for advance in self.get("advances"):
 			advance.exchange_rate = 1.0
@@ -737,7 +737,7 @@ def get_outstanding_amount_for_claim(claim):
 @frappe.whitelist()
 def get_expense_claim_account_and_cost_center(expense_claim_type: str, company: str) -> dict:
 	data = get_expense_claim_account(expense_claim_type, company)
-	cost_center = erpnext.get_default_cost_center(company)
+	cost_center = erp.get_default_cost_center(company)
 
 	return {"account": data.get("account"), "cost_center": cost_center}
 
@@ -882,7 +882,7 @@ def get_expense_claim(employee_advance: str | dict) -> Document:
 	expense_claim.employee = employee_advance.employee
 	expense_claim.payable_account = (
 		get_default_payable_account(company)
-		if employee_advance.currency == erpnext.get_company_currency(company)
+		if employee_advance.currency == erp.get_company_currency(company)
 		else None
 	)
 	expense_claim.cost_center = default_cost_center

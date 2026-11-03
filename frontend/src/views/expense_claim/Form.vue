@@ -212,7 +212,7 @@ const companyDetails = createResource({
 })
 
 const exchangeRate = createResource({
-	url: "erpnext.setup.utils.get_exchange_rate",
+	url: "erp.setup.utils.get_exchange_rate",
 	onSuccess(data) {
 		expenseClaim.value.exchange_rate = data
 	},

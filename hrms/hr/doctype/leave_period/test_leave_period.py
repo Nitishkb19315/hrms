@@ -3,7 +3,7 @@
 
 import frappe
 
-import erpnext
+import erp
 
 from hrms.tests.utils import HRMSTestSuite
 

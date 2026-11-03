@@ -17,7 +17,7 @@ def refetch_resource(cache_key: str | list, user=None):
 
 def get_region(company=None):
 	"""Return the country used to resolve regional overrides, based on flag,
-	company or global settings. Mirrors erpnext.get_region.
+	company or global settings. Mirrors erp.get_region.
 
 	You can also set the global company flag in `frappe.flags.company`.
 	"""
@@ -32,7 +32,7 @@ def get_region(company=None):
 
 def allow_regional(fn):
 	"""Decorator to make a function regionally overridable. Mirrors
-	erpnext.allow_regional so HRMS functions can be overridden per region via the
+	erp.allow_regional so HRMS functions can be overridden per region via the
 	`regional_overrides` hook.
 
 	Example:

@@ -8,8 +8,8 @@ from frappe.core.doctype.user_permission.test_user_permission import create_user
 from frappe.tests.classes.context_managers import freeze_time
 from frappe.utils import add_days, getdate
 
-from erpnext.setup.doctype.employee.test_employee import make_employee
-from erpnext.setup.doctype.holiday_list.test_holiday_list import make_holiday_list
+from erp.setup.doctype.employee.test_employee import make_employee
+from erp.setup.doctype.holiday_list.test_holiday_list import make_holiday_list
 
 from hrms.hr.doctype.holiday_list_assignment.test_holiday_list_assignment import (
 	create_holiday_list_assignment,

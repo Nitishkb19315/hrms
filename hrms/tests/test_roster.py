@@ -1,7 +1,7 @@
 import frappe
 from frappe.utils import add_days, getdate
 
-from erpnext.setup.doctype.employee.test_employee import make_employee
+from erp.setup.doctype.employee.test_employee import make_employee
 
 from hrms.api.roster import FILTER_DOCTYPES, get_permitted_filter_doctypes, get_shifts, insert_shift
 from hrms.tests.utils import HRMSTestSuite

@@ -7,7 +7,7 @@ from frappe import _
 from frappe.query_builder.functions import Sum
 from frappe.utils import flt
 
-from erpnext.accounts.report.financial_statements import get_period_list
+from erp.accounts.report.financial_statements import get_period_list
 
 
 def execute(filters=None):

@@ -4,8 +4,8 @@
 import frappe
 from frappe.utils import add_days, getdate
 
-from erpnext.setup.doctype.employee.employee import is_holiday
-from erpnext.setup.doctype.employee.test_employee import make_employee
+from erp.setup.doctype.employee.employee import is_holiday
+from erp.setup.doctype.employee.test_employee import make_employee
 
 from hrms.hr.doctype.attendance.attendance import mark_attendance
 from hrms.hr.doctype.employee_attendance_tool.employee_attendance_tool import (

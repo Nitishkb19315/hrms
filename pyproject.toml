@@ -46,7 +46,7 @@ docstring-code-format = true
 
 [tool.ruff.lint.isort.sections]
 "frappe" = ["frappe"]
-"erpnext" = ["erpnext"]
+"erp" = ["erp"]
 "hrms" = ["hrms"]
 
 [tool.ruff.lint.isort]
@@ -55,7 +55,7 @@ section-order = [
     "standard-library",
     "third-party",
     "frappe",
-    "erpnext",
+    "erp",
     "hrms",
     "first-party",
     "local-folder",
@@ -81,4 +81,4 @@ index_html_path = "./hrms/www/roster.html"
 
 [tool.bench.frappe-dependencies]
 frappe = ">=17.0.0-dev,<18.0.0"
-erpnext = ">=17.0.0-dev,<18.0.0"
+erp = ">=17.0.0-dev,<18.0.0"

@@ -10,7 +10,7 @@ cd ./frappe-bench || exit
 
 # We want to exclude strings from ERPNext from HRMS's translations.
 echo "Get ERPNext..."
-bench get-app --skip-assets --branch "${BASE_BRANCH}" erpnext
+bench get-app --skip-assets --branch "${BASE_BRANCH}" erp
 
 echo "Get HRMS..."
 bench get-app --skip-assets hrms "${GITHUB_WORKSPACE}"

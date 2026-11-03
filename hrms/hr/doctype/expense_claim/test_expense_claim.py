@@ -4,11 +4,11 @@
 import frappe
 from frappe.utils import flt, nowdate, random_string, today
 
-import erpnext
-from erpnext import get_company_currency
-from erpnext.accounts.doctype.account.test_account import create_account
-from erpnext.setup.doctype.employee.test_employee import make_employee
-from erpnext.setup.utils import get_exchange_rate
+import erp
+from erp import get_company_currency
+from erp.accounts.doctype.account.test_account import create_account
+from erp.setup.doctype.employee.test_employee import make_employee
+from erp.setup.utils import get_exchange_rate
 
 from hrms.hr.doctype.expense_claim.expense_claim import (
 	MismatchError,
@@ -707,7 +707,7 @@ class TestExpenseClaim(HRMSTestSuite):
 		self.assertEqual(expense_claim.status, "Paid")
 
 	def test_expense_claim_against_delivery_trip(self):
-		from erpnext.stock.doctype.delivery_trip.test_delivery_trip import (
+		from erp.stock.doctype.delivery_trip.test_delivery_trip import (
 			create_address,
 			create_delivery_trip,
 			create_driver,
@@ -1487,7 +1487,7 @@ def make_claim_payment_entry(expense_claim, amount):
 
 
 def make_journal_entry(expense_claim, do_not_submit=False):
-	from erpnext.accounts.doctype.journal_entry.journal_entry import get_default_bank_cash_account
+	from erp.accounts.doctype.journal_entry.journal_entry import get_default_bank_cash_account
 
 	expense_claim = frappe.get_doc("Expense Claim", expense_claim.name)
 	default_bank_cash_account = get_default_bank_cash_account(expense_claim.company, "Bank")
@@ -1509,7 +1509,7 @@ def make_journal_entry(expense_claim, do_not_submit=False):
 			"reference_type": "Expense Claim",
 			"party_type": "Employee",
 			"party": expense_claim.employee,
-			"cost_center": erpnext.get_default_cost_center(expense_claim.company),
+			"cost_center": erp.get_default_cost_center(expense_claim.company),
 			"reference_name": expense_claim.name,
 		},
 	)
@@ -1521,7 +1521,7 @@ def make_journal_entry(expense_claim, do_not_submit=False):
 			"credit_in_account_currency": payable_amount,
 			"balance": default_bank_cash_account.balance,
 			"account_currency": default_bank_cash_account.account_currency,
-			"cost_center": erpnext.get_default_cost_center(expense_claim.company),
+			"cost_center": erp.get_default_cost_center(expense_claim.company),
 			"account_type": default_bank_cash_account.account_type,
 		},
 	)

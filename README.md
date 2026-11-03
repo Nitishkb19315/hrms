@@ -99,7 +99,7 @@ Use the following credentials to log in:
 2. In a separate terminal window, run the following commands
 	```sh
 	$ bench new-site hrms.localhost
-	$ bench get-app erpnext
+	$ bench get-app erp
 	$ bench get-app hrms
 	$ bench --site hrms.localhost install-app hrms
 	$ bench --site hrms.localhost add-to-hosts

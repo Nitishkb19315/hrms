@@ -8,8 +8,8 @@ from frappe.model.document import Document
 from frappe.query_builder.functions import Abs, Sum
 from frappe.utils import flt, get_link_to_form, nowdate
 
-import erpnext
-from erpnext.accounts.doctype.journal_entry.journal_entry import get_default_bank_cash_account
+import erp
+from erp.accounts.doctype.journal_entry.journal_entry import get_default_bank_cash_account
 
 import hrms
 from hrms.hr.utils import validate_active_employee
@@ -71,7 +71,7 @@ class EmployeeAdvance(Document):
 			default_advance_account = frappe.db.get_value(
 				"Company", self.company, "default_employee_advance_account"
 			)
-			same_currency = self.currency == erpnext.get_company_currency(self.company)
+			same_currency = self.currency == erp.get_company_currency(self.company)
 
 			if default_advance_account and same_currency:
 				self.advance_account = default_advance_account
@@ -290,7 +290,7 @@ class EmployeeAdvance(Document):
 			self.pending_amount = pending_amount
 
 	def check_linked_payment_entry(self):
-		from erpnext.accounts.utils import (
+		from erp.accounts.utils import (
 			remove_ref_doc_link_from_pe,
 			update_accounting_ledgers_after_reference_removal,
 		)
@@ -350,7 +350,7 @@ def make_return_entry(
 	je.voucher_type = get_voucher_type(mode_of_payment)
 	je.company = company
 	je.remark = "Return against Employee Advance: " + employee_advance_name
-	je.multi_currency = 1 if advance_account_currency != erpnext.get_company_currency(company) else 0
+	je.multi_currency = 1 if advance_account_currency != erp.get_company_currency(company) else 0
 
 	advance_account_amount = flt(return_amount)
 
@@ -365,7 +365,7 @@ def make_return_entry(
 			"party_type": "Employee",
 			"party": employee,
 			"is_advance": "Yes",
-			"cost_center": erpnext.get_default_cost_center(company),
+			"cost_center": erp.get_default_cost_center(company),
 		},
 	)
 
@@ -377,7 +377,7 @@ def make_return_entry(
 			"debit_in_account_currency": bank_amount,
 			"account_currency": bank_cash_account.account_currency,
 			"account_type": bank_cash_account.account_type,
-			"cost_center": erpnext.get_default_cost_center(company),
+			"cost_center": erp.get_default_cost_center(company),
 		},
 	)
 
@@ -385,7 +385,7 @@ def make_return_entry(
 
 
 def get_same_currency_bank_cash_account(company, currency, mode_of_payment=None, account=None):
-	company_currency = erpnext.get_company_currency(company)
+	company_currency = erp.get_company_currency(company)
 	if currency == company_currency:
 		return get_default_bank_cash_account(
 			company,
@@ -395,7 +395,7 @@ def get_same_currency_bank_cash_account(company, currency, mode_of_payment=None,
 		)
 
 	if not account and mode_of_payment:
-		from erpnext.accounts.doctype.sales_invoice.sales_invoice import get_bank_cash_account
+		from erp.accounts.doctype.sales_invoice.sales_invoice import get_bank_cash_account
 
 		account = get_bank_cash_account(mode_of_payment, company).get("account")
 
