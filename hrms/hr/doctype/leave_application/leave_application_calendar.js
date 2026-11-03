@@ -608,7 +608,7 @@ frappe.views.calendar["Leave Application"] = {
 					set_allowed_leave_types_query(quick_entry, []);
 
 					quick_entry.set_query("employee", () => ({
-						query: "erpnext.controllers.queries.employee_query",
+						query: "erp.controllers.queries.employee_query",
 					}));
 
 					quick_entry.set_df_property(

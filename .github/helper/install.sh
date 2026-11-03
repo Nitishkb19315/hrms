@@ -13,7 +13,8 @@ pip install frappe-bench
 githubbranch=${GITHUB_BASE_REF:-${GITHUB_REF##*/}}
 frappeuser=${FRAPPE_USER:-"frappe"}
 frappebranch=${FRAPPE_BRANCH:-$githubbranch}
-erpnextbranch=${ERPNEXT_BRANCH:-$githubbranch}
+erprepo=${ERP_REPO:-"https://github.com/${frappeuser}/erp"}
+erpbranch=${ERP_BRANCH:-$githubbranch}
 paymentsbranch=${PAYMENTS_BRANCH:-${githubbranch%"-hotfix"}}
 lendingbranch="develop"
 
@@ -48,7 +49,7 @@ sed -i 's/socketio:/# socketio:/g' Procfile
 sed -i 's/redis_socketio:/# redis_socketio:/g' Procfile
 
 bench get-app "https://github.com/${frappeuser}/payments" --branch "$paymentsbranch"
-bench get-app "https://github.com/${frappeuser}/erpnext" --branch "$erpnextbranch" --resolve-deps
+bench get-app "${erprepo}" --branch "$erpbranch" --resolve-deps
 bench get-app "https://github.com/${frappeuser}/lending" --branch "$lendingbranch"
 bench get-app hrms "${GITHUB_WORKSPACE}"
 bench setup requirements --dev

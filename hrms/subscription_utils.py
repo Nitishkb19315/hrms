@@ -66,7 +66,7 @@ def get_active_employees() -> int:
 
 @frappe.whitelist(methods=["POST"])
 def subscription_updated(app: str, plan: str):
-	if app in ["hrms", "erpnext"] and plan:
+	if app in ["hrms", "erp"] and plan:
 		update_erpnext_access()
 
 
@@ -135,7 +135,7 @@ def set_app_logo():
 
 
 def get_erpnext_roles() -> set:
-	erpnext_roles = get_roles_for_app("erpnext")
+	erpnext_roles = get_roles_for_app("erp")
 	hrms_roles = get_roles_for_app("hrms")
 	return erpnext_roles - hrms_roles - set(STANDARD_ROLES)
 

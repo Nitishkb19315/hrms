@@ -8,7 +8,7 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import cstr, flt, get_first_day, get_last_day, getdate
 
-import erpnext
+import erp
 
 from hrms.hr.utils import calculate_tax_with_marginal_relief
 
@@ -41,7 +41,7 @@ class IncomeTaxSlab(Document):
 
 	def validate(self):
 		if self.company:
-			self.currency = erpnext.get_company_currency(self.company)
+			self.currency = erp.get_company_currency(self.company)
 
 
 def calculate_tax_by_tax_slab(annual_taxable_earning, tax_slab, eval_globals=None, eval_locals=None):
@@ -129,7 +129,7 @@ def eval_tax_slab_condition(condition, eval_globals=None, eval_locals=None):
 		raise
 
 
-@erpnext.allow_regional
+@erp.allow_regional
 def apply_surcharge_with_marginal_relief(
 	tax_amount, annual_taxable_earning, tax_slab, eval_globals, eval_locals
 ):

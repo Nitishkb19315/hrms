@@ -4,13 +4,13 @@ from frappe.query_builder import Case, DocType
 from frappe.query_builder.functions import Coalesce, Count, Sum
 from frappe.utils import add_months, cint, flt, getdate, today
 
-from erpnext.selling.doctype.customer.customer_overview import (
+from erp.selling.doctype.customer.customer_overview import (
 	PERIODS,
 	pct_change,
 	permitted,
 	resolve_period,
 )
-from erpnext.setup.utils import get_exchange_rate
+from erp.setup.utils import get_exchange_rate
 
 ATTENDANCE_STATUS = ("Present", "Work From Home", "Half Day", "On Leave", "Absent")
 UNPAID_CLAIM_STATUS = ("Unpaid", "Partially Paid")

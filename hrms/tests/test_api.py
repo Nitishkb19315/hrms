@@ -1,6 +1,6 @@
 import frappe
 
-from erpnext.setup.doctype.employee.test_employee import make_employee
+from erp.setup.doctype.employee.test_employee import make_employee
 
 from hrms.api import (
 	get_company_currencies,

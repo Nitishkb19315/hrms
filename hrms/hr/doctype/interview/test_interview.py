@@ -10,8 +10,8 @@ from frappe.core.doctype.user_permission.test_user_permission import create_user
 from frappe.permissions import add_user_permission
 from frappe.utils import add_days, get_datetime, get_time, getdate, nowtime
 
-from erpnext.setup.doctype.designation.test_designation import create_designation
-from erpnext.setup.doctype.employee.test_employee import make_employee
+from erp.setup.doctype.designation.test_designation import create_designation
+from erp.setup.doctype.employee.test_employee import make_employee
 
 from hrms.hr.doctype.interview.interview import (
 	DuplicateInterviewRoundError,
@@ -305,7 +305,7 @@ def create_skill_set(skill_set):
 
 def setup_reminder_settings():
 	if not frappe.db.exists("Email Template", _("Interview Reminder")):
-		base_path = frappe.get_app_path("erpnext", "hr", "doctype")
+		base_path = frappe.get_app_path("erp", "hr", "doctype")
 		response = frappe.read_file(
 			os.path.join(base_path, "interview/interview_reminder_notification_template.html")
 		)
@@ -321,7 +321,7 @@ def setup_reminder_settings():
 		).insert(ignore_permissions=True)
 
 	if not frappe.db.exists("Email Template", _("Interview Feedback Reminder")):
-		base_path = frappe.get_app_path("erpnext", "hr", "doctype")
+		base_path = frappe.get_app_path("erp", "hr", "doctype")
 		response = frappe.read_file(
 			os.path.join(base_path, "interview/interview_feedback_reminder_template.html")
 		)

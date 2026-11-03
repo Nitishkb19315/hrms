@@ -91,7 +91,7 @@ class TestDefaultHolidayList(HRMSTestSuite):
 
 	def test_failure_is_logged_without_failing_the_setup(self):
 		with patch(
-			"erpnext.setup.doctype.holiday_list.holiday_list.HolidayList.get_local_holidays",
+			"erp.setup.doctype.holiday_list.holiday_list.HolidayList.get_local_holidays",
 			side_effect=Exception("holidays library broke"),
 		):
 			create_default_holiday_list(self.wizard_args())

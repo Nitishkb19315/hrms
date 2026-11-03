@@ -5,9 +5,9 @@ import frappe
 from frappe import _dict
 from frappe.utils import flt, nowdate
 
-import erpnext
-from erpnext.accounts.doctype.account.test_account import create_account
-from erpnext.setup.doctype.employee.test_employee import make_employee
+import erp
+from erp.accounts.doctype.account.test_account import create_account
+from erp.setup.doctype.employee.test_employee import make_employee
 
 from hrms.hr.doctype.employee_advance.employee_advance import (
 	EmployeeAdvanceOverPayment,
@@ -523,7 +523,7 @@ def manual_journal_entry_for_advance(advance) -> dict:
 	je.voucher_type = "Bank Entry"
 	je.company = doc.company
 	je.remark = "Payment against Employee Advance: " + advance.name + "\n" + doc.purpose
-	je.multi_currency = 1 if doc.currency != erpnext.get_company_currency(doc.company) else 0
+	je.multi_currency = 1 if doc.currency != erp.get_company_currency(doc.company) else 0
 
 	je.append(
 		"accounts",
@@ -534,7 +534,7 @@ def manual_journal_entry_for_advance(advance) -> dict:
 			"reference_type": "Employee Advance",
 			"reference_name": doc.name,
 			"party_type": "Employee",
-			"cost_center": erpnext.get_default_cost_center(doc.company),
+			"cost_center": erp.get_default_cost_center(doc.company),
 			"party": doc.employee,
 			"is_advance": "Yes",
 		},
@@ -544,7 +544,7 @@ def manual_journal_entry_for_advance(advance) -> dict:
 		"accounts",
 		{
 			"account": payment_account.account or payment_account.name,
-			"cost_center": erpnext.get_default_cost_center(doc.company),
+			"cost_center": erp.get_default_cost_center(doc.company),
 			"credit_in_account_currency": flt(doc.advance_amount),
 			"account_currency": doc.currency,
 			"account_type": payment_account.account_type,
@@ -575,7 +575,7 @@ def make_employee_advance(employee_name, args=None, do_not_submit=False):
 	doc.employee = employee_name
 	doc.company = "_Test Company"
 	doc.purpose = "For site visit"
-	doc.currency = emp_details.salary_currency or erpnext.get_company_currency("_Test company")
+	doc.currency = emp_details.salary_currency or erp.get_company_currency("_Test company")
 	doc.advance_amount = 1000
 	doc.posting_date = nowdate()
 	doc.advance_account = emp_details.employee_advance_account or "_Test Employee Advance - _TC"
